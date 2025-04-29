@@ -7,14 +7,14 @@ use App\Models\Customer;
 
 class TotalCustomersChartWidget extends LineChartWidget
 {
-    protected static ?string $heading = 'Total customers';
+    protected static ?string $heading = 'Clientes totales';
     protected static ?string $maxHeight = '300px';
 
     protected function getData(): array
     {
         $months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
         ];
         $totals = [];
         $cumulative = 0;
@@ -31,7 +31,7 @@ class TotalCustomersChartWidget extends LineChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Customers',
+                    'label' => 'Clientes',
                     'data' => $totals,
                     'borderColor' => '#fbbf24',
                     'backgroundColor' => 'rgba(251,191,36,0.1)',

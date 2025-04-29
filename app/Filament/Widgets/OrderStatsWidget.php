@@ -30,10 +30,10 @@ class OrderStatsWidget extends BaseWidget
         $averagePrice = Order::avg('total') ?? 0;
 
         return [
-            Card::make('Orders', number_format($ordersCount))
+            Card::make('Órdenes', number_format($ordersCount))
                 ->chart($ordersChart),
-            Card::make('Open orders', number_format($openOrders)),
-            Card::make('Average price', number_format($averagePrice, 2)),
+            Card::make('Órdenes abiertas', number_format($openOrders)),
+            Card::make('Precio promedio', number_format($averagePrice, 2)),
         ];
     }
 }

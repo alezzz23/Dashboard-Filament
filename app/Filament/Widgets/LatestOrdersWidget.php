@@ -8,7 +8,7 @@ use App\Models\Order;
 
 class LatestOrdersWidget extends BaseWidget
 {
-    protected static ?string $heading = 'Latest Orders';
+    protected static ?string $heading = 'Órdenes recientes';
     protected static ?int $sort = 2;
     protected int | string | array $columnSpan = 'full';
 
@@ -18,19 +18,19 @@ class LatestOrdersWidget extends BaseWidget
             ->query(Order::query()->latest('created_at'))
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Order Date')
-                    ->date('M d, Y')
+                    ->label('Fecha de orden')
+                    ->date('d/m/Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('number')
-                    ->label('Number')
+                    ->label('Número')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('customer.name')
-                    ->label('Customer')
+                    ->label('Cliente')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('status')
-                    ->label('Status')
+                    ->label('Estado')
                     ->colors([
                         'primary' => 'new',
                         'warning' => 'processing',
@@ -45,14 +45,14 @@ class LatestOrdersWidget extends BaseWidget
                         'heroicon-o-x-circle' => 'cancelled',
                     ]),
                 Tables\Columns\TextColumn::make('currency')
-                    ->label('Currency')
+                    ->label('Moneda')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total')
-                    ->label('Total price')
+                    ->label('Precio total')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('shipping_cost')
-                    ->label('Shipping cost')
+                    ->label('Costo de envío')
                     ->formatStateUsing(fn () => 'Open')
                     ->color('warning'),
             ])

@@ -64,19 +64,19 @@ class DashboardStatsWidget extends BaseWidget
         $ordersDescIcon = $ordersDiff >= 0 ? 'heroicon-o-arrow-trending-up' : 'heroicon-o-arrow-trending-down';
 
         return [
-            Card::make('Revenue', '$' . number_format($revenueTotal, 2, '.', ','))
+            Card::make('Ingresos', '$' . number_format($revenueTotal, 2, '.', ','))
                 ->description($revenueDesc)
                 ->descriptionIcon($revenueDescIcon)
                 ->descriptionColor($revenueDescColor)
                 ->chart($revenueChart)
                 ->color($revenueDescColor),
-            Card::make('New customers', number_format($customersTotal))
+            Card::make('Nuevos clientes', number_format($customersTotal))
                 ->description($customersDesc)
                 ->descriptionIcon($customersDescIcon)
                 ->descriptionColor($customersDescColor)
                 ->chart($customersChart)
                 ->color($customersDescColor),
-            Card::make('New orders', number_format($ordersTotal))
+            Card::make('Nuevas órdenes', number_format($ordersTotal))
                 ->description($ordersDesc)
                 ->descriptionIcon($ordersDescIcon)
                 ->descriptionColor($ordersDescColor)

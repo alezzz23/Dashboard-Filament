@@ -12,6 +12,20 @@ class OrderItem extends Model
         'quantity',
     ];
 
+    protected static function booted()
+    {
+        static::saved(function ($orderItem) {
+            if ($orderItem->order) {
+                $orderItem->order->recalculateTotal();
+            }
+        });
+        static::deleted(function ($orderItem) {
+            if ($orderItem->order) {
+                $orderItem->order->recalculateTotal();
+            }
+        });
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);

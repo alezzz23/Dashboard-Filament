@@ -17,8 +17,8 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationGroup = 'Shop';
-    protected static ?string $navigationLabel = 'Orders';
+    protected static ?string $navigationGroup = 'Tienda';
+    protected static ?string $navigationLabel = 'Órdenes';
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     public static function getNavigationBadge(): ?string
@@ -37,29 +37,29 @@ class OrderResource extends Resource
             Forms\Components\Grid::make(2)
                 ->schema([
                     Forms\Components\TextInput::make('number')
-                        ->label('Number')
+                        ->label('Número')
                         ->default(fn () => 'OR-' . fake()->unique()->numberBetween(100000, 999999))
                         ->required()
                         ->columnSpan(1),
                     Forms\Components\Select::make('customer_id')
-                        ->label('Customer')
+                        ->label('Cliente')
                         ->relationship('customer', 'name')
                         ->searchable()
                         ->createOptionForm([
-                            Forms\Components\TextInput::make('name')->required(),
-                            Forms\Components\TextInput::make('email')->email()->required(),
-                            Forms\Components\TextInput::make('phone'),
+                            Forms\Components\TextInput::make('name')->label('Nombre')->required(),
+                            Forms\Components\TextInput::make('email')->label('Correo')->email()->required(),
+                            Forms\Components\TextInput::make('phone')->label('Teléfono'),
                         ])
                         ->required()
                         ->columnSpan(1),
                     Forms\Components\ToggleButtons::make('status')
-                        ->label('Status')
+                        ->label('Estado')
                         ->options([
-                            'shipped' => 'Shipped',
-                            'processing' => 'Processing',
-                            'new' => 'New',
-                            'delivered' => 'Delivered',
-                            'cancelled' => 'Cancelled',
+                            'shipped' => 'Enviado',
+                            'processing' => 'Procesando',
+                            'new' => 'Nuevo',
+                            'delivered' => 'Entregado',
+                            'cancelled' => 'Cancelado',
                         ])
                         ->icons([
                             'shipped' => 'heroicon-o-truck',
@@ -80,7 +80,7 @@ class OrderResource extends Resource
                         ->columnSpan(2)
                         ->extraAttributes(['class' => 'order-status-toggle']),
                     Forms\Components\Select::make('currency')
-                        ->label('Currency')
+                        ->label('Moneda')
                         ->options([
                             'USD' => 'USD',
                             'EUR' => 'EUR',
@@ -89,11 +89,11 @@ class OrderResource extends Resource
                         ->required()
                         ->columnSpan(1),
                     Forms\Components\Select::make('country')
-                        ->label('Country')
+                        ->label('País')
                         ->options([
-                            'US' => 'United States',
-                            'MX' => 'Mexico',
-                            'ES' => 'Spain',
+                            'US' => 'Estados Unidos',
+                            'MX' => 'México',
+                            'ES' => 'España',
                         ])
                         ->searchable()
                         ->required()
@@ -102,39 +102,39 @@ class OrderResource extends Resource
             Forms\Components\Card::make()
                 ->schema([
                     Forms\Components\TextInput::make('address')
-                        ->label('Street address')
+                        ->label('Dirección')
                         ->columnSpanFull(),
                     Forms\Components\Grid::make(3)
                         ->schema([
                             Forms\Components\TextInput::make('city')
-                                ->label('City'),
+                                ->label('Ciudad'),
                             Forms\Components\TextInput::make('state')
-                                ->label('State / Province'),
+                                ->label('Estado / Provincia'),
                             Forms\Components\TextInput::make('zip')
-                                ->label('Zip / Postal code'),
+                                ->label('Código Postal'),
                         ]),
                     Forms\Components\Textarea::make('notes')
-                        ->label('Notes')
+                        ->label('Notas')
                         ->rows(2),
                 ]),
-            Forms\Components\Section::make('Order Items')
+            Forms\Components\Section::make('Productos de la orden')
                 ->schema([
                     Forms\Components\Repeater::make('orderItems')
-                        ->label('Order Items')
+                        ->label('Productos de la orden')
                         ->relationship()
                         ->schema([
                             Forms\Components\Select::make('product_id')
-                                ->label('Product')
+                                ->label('Producto')
                                 ->relationship('product', 'name')
                                 ->required(),
                             Forms\Components\TextInput::make('quantity')
-                                ->label('Quantity')
+                                ->label('Cantidad')
                                 ->numeric()
                                 ->minValue(1)
                                 ->default(1)
                                 ->required(),
                         ])
-                        ->createItemButtonLabel('Add Product')
+                        ->createItemButtonLabel('Agregar producto')
                         ->columns(2),
                 ])
         ]);
@@ -142,16 +142,46 @@ class OrderResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
-            Tables\Columns\TextColumn::make('number')->label('Order Number')->sortable(),
-            Tables\Columns\TextColumn::make('customer.name')->label('Customer')->sortable(),
-            Tables\Columns\TextColumn::make('total')->label('Total')->sortable(),
-            Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
-            Tables\Columns\TextColumn::make('created_at')->label('Created')->dateTime('d/m/Y')->sortable(),
-        ])->actions([
-            Tables\Actions\EditAction::make(),
-        ]);
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('number')->label('Número')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('customer.name')->label('Cliente')->sortable()->searchable(),
+                Tables\Columns\BadgeColumn::make('status')->label('Estado')
+                    ->colors([
+                        'primary' => 'new',
+                        'warning' => 'processing',
+                        'success' => ['shipped', 'delivered'],
+                        'danger' => 'cancelled',
+                    ])
+                    ->icons([
+                        'heroicon-o-truck' => 'shipped',
+                        'heroicon-o-check-circle' => 'delivered',
+                        'heroicon-o-arrow-path' => 'processing',
+                        'heroicon-o-plus-circle' => 'new',
+                        'heroicon-o-x-circle' => 'cancelled',
+                    ]),
+                Tables\Columns\TextColumn::make('currency')->label('Moneda')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('total')->label('Total')->sortable()
+                    ->formatStateUsing(fn ($state) => '$' . number_format($state ?? 0, 2)),
+                // Tables\Columns\TextColumn::make('shipping_cost')->label('Costo de envío')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Fecha de orden')->date('d/m/Y')->sortable(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Filtrar por estado')
+                    ->options([
+                        '' => 'Todos',
+                        'new' => 'Nuevo',
+                        'processing' => 'Procesando',
+                        'shipped' => 'Enviado',
+                        'delivered' => 'Entregado',
+                        'cancelled' => 'Cancelado',
+                    ]),
+            ])
+            ->searchable()
+            ->paginated(true)
+            ->defaultPaginationPageOption(10)
+            ->paginationPageOptions([10, 25, 50, 100]);
     }
 
     public static function getRelations(): array

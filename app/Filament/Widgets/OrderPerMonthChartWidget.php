@@ -7,14 +7,14 @@ use App\Models\Order;
 
 class OrderPerMonthChartWidget extends LineChartWidget
 {
-    protected static ?string $heading = 'Orders per month';
+    protected static ?string $heading = 'Órdenes por mes';
     protected static ?string $maxHeight = '300px';
 
     protected function getData(): array
     {
         $months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
         ];
         $orders = Order::query()
             ->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
@@ -29,7 +29,7 @@ class OrderPerMonthChartWidget extends LineChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Orders',
+                    'label' => 'Órdenes',
                     'data' => $data,
                     'borderColor' => '#fbbf24',
                     'backgroundColor' => 'rgba(251,191,36,0.1)',

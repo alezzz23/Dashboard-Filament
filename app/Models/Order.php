@@ -19,17 +19,16 @@ class Order extends Model
         'address',
     ];
 
-    protected static function booted()
+    public function recalculateTotal()
     {
-        static::saving(function ($order) {
-            $total = 0;
-            foreach ($order->orderItems as $item) {
-                if ($item->product && $item->quantity) {
-                    $total += $item->product->price * $item->quantity;
-                }
+        $total = 0;
+        foreach ($this->orderItems as $item) {
+            if ($item->product && $item->quantity) {
+                $total += $item->product->price * $item->quantity;
             }
-            $order->total = $total;
-        });
+        }
+        $this->total = $total;
+        $this->saveQuietly();
     }
 
     public function customer()
