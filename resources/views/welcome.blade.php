@@ -1,88 +1,138 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: 'Figtree', sans-serif;
-            padding-top: 70px; /* Para compensar el navbar fijo */
-        }
-        .navbar {
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
-        }
-        .dropdown-menu {
-            min-width: 220px;
-        }
-        .dropdown-item {
-            padding: 0.5rem 1.5rem;
-        }
-        .navbar-brand {
-            font-weight: 600;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III Jornada Científica 2025</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
 </head>
-<body class="antialiased">
-    <!-- Navbar -->
-    <x-navbar />
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">Jornada Científica 2025</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#acerca">Acerca</a></li>
+                <li><a href="#ponentes">Ponentes</a></li>
+                <li><a href="#programa">Programa</a></li>
+                <li><a href="#registro">Registro</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Page Content -->
-    <main class="py-4">
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
         <div class="container">
-            @yield('content')
-            
-            <!-- Welcome Content -->
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">{{ __('Bienvenido a la Aplicación') }}</div>
-
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                            {{ __('¡Has iniciado sesión correctamente!') }}
-                            
-                            <div class="mt-4">
-                                <p>Este es un ejemplo de página de bienvenida con una barra de navegación responsiva.</p>
-                                <p>La barra de navegación incluye:</p>
-                                <ul>
-                                    <li>Menú desplegable para móviles</li>
-                                    <li>Enlaces de navegación</li>
-                                    <li>Menú de usuario con opciones de perfil y cierre de sesión</li>
-                                    <li>Diseño responsivo</li>
-                                    <li>Iconos de Font Awesome</li>
-                                </ul>
-                            </div>
-                        </div>
+            <div class="hero-content">
+                <h1>III Jornada Científica 2025</h1>
+                <p class="subtitle">Un espacio para el intercambio de conocimientos y avances en la investigación científica</p>
+                <a href="#registro" class="cta-button">Regístrate Ahora</a>
+                
+                <div class="event-info">
+                    <div class="info-card">
+                        <h3>Fecha</h3>
+                        <p>15-16 Marzo 2025</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Modalidad</h3>
+                        <p>Presencial y Virtual</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Participantes</h3>
+                        <p>500+ Investigadores</p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom Scripts -->
-    @stack('scripts')
-</body>
-</html>
+    <!-- About Section -->
+    <section id="acerca" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Intercambio de Conocimientos</h2>
+                    <p>La III Jornada Científica 2025 representa un espacio privilegiado para el encuentro de investigadores, académicos y profesionales comprometidos con el avance de la ciencia y la tecnología.</p>
+                    <p>Durante dos días intensivos, facilitaremos el intercambio de ideas innovadoras, metodologías de vanguardia y resultados de investigación que están transformando nuestro entendimiento del mundo.</p>
+                    <p>Únete a nosotros en esta celebración del conocimiento científico y contribuye al diálogo que está dando forma al futuro de la investigación.</p>
+                </div>
+                <div class="about-image">
+                    <span>Imagen del Evento Científico</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="ponentes" class="speakers">
+        <div class="container">
+            <h2>Ponentes Destacados</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-image">Foto Dr. María García</div>
+                    <div class="speaker-info">
+                        <h3>Dr. María García</h3>
+                        <p>Investigadora Principal<br>Instituto de Biotecnología</p>
+                    </div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">Foto Dr. Carlos Rodríguez</div>
+                    <div class="speaker-info">
+                        <h3>Dr. Carlos Rodríguez</h3>
+                        <p>Director de Investigación<br>Centro de Física Aplicada</p>
+                    </div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">Foto Dra. Ana López</div>
+                    <div class="speaker-info">
+                        <h3>Dra. Ana López</h3>
+                        <p>Jefa de Departamento<br>Ciencias Ambientales</p>
+                    </div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">Foto Dr. José Martínez</div>
+                    <div class="speaker-info">
+                        <h3>Dr. José Martínez</h3>
+                        <p>Investigador Senior<br>Tecnologías Emergentes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="programa" class="schedule">
+        <div class="container">
+            <h2>Programa del Evento</h2>
+            <div class="schedule-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">09:00</div>
+                    <div class="timeline-content">
+                        <h3>Inauguración y Bienvenida</h3>
+                        <p>Palabras de apertura y presentación de objetivos</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">10:00</div>
+                    <div class="timeline-content">
+                        <h3>Conferencia Magistral</h3>
+                        <p>"Avances en Investigación Científica: Perspectivas Futuras"</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">11:30</div>
+                    <div class="timeline-content">
+                        <h3>Mesa Redonda</h3>
+                        <p>Intercambio de experiencias en metodologías de investigación</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">14:00</div>
+                    <div class="timeline-content">
+                        <h3>Presentación de Proyectos</h3>
+                        <p>Exposición de investigaciones en desarrollo</p>
+                    </div>
+                
+    <!-- script tag -->

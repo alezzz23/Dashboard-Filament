@@ -1,0 +1,140 @@
+/* Responsive Styles */
+
+/* Tablets and below */
+@media (max-width: 1024px) {
+    .lesson {
+        justify-content: center;
+    }
+    
+    .lesson-wrap {
+        width: 280px;
+        margin: 20px 15px;
+    }
+    
+    .container-3 {
+        padding: 60px 20px;
+    }
+    
+    .container-3 .image,
+    .heading-3 {
+        flex: 1 1 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .menu-footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .menu-2 {
+        margin-top: 30px;
+        justify-content: center;
+        gap: 40px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .navigation {
+        height: 60px;
+        padding: 0 15px;
+    }
+    
+    .navigation h2 {
+        font-size: 18px;
+    }
+    
+    .nav-menu ul li {
+        margin-right: 8px;
+    }
+    
+    .nav-menu ul li a {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+    
+    .container-1 {
+        height: 70vh;
+    }
+    
+    .heading h2 {
+        font-size: 36px;
+    }
+    
+    .heading h3 {
+        font-size: 28px;
+    }
+    
+    .lesson-wrap {
+        width: 100%;
+        max-width: 350px;
+        margin: 20px auto;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 576px) {
+    .navigation {
+        padding: 0 10px;
+    }
+    
+    .nav-menu ul li a {
+        display: none;
+    }
+    
+    .nav-menu ul li i {
+        display: inline-block;
+        font-size: 24px;
+    }
+    
+    .container-1 {
+        height: 60vh;
+        margin-top: 60px;
+    }
+    
+    .heading h2 {
+        font-size: 28px;
+    }
+    
+    .heading h3 {
+        font-size: 22px;
+    }
+    
+    .heading-2 h6 {
+        font-size: 26px;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 400px) {
+    .heading h2 {
+        font-size: 24px;
+    }
+    
+    .heading h3 {
+        font-size: 20px;
+    }
+    
+    .heading-2 h6 {
+        font-size: 24px;
+    }
+}
+
+/* Sidebar Toggle for Mobile */
+@media (min-width: 577px) {
+    .sidebar {
+        display: none !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        display: block;
+    }
+    
+    .sidebar-toggle {
+        right: 0;
+    }
+}
