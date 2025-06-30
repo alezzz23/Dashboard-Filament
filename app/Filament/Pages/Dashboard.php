@@ -3,18 +3,30 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Dashboard as BaseDashboard;
-use App\Filament\Widgets\OrderPerMonthChartWidget;
-use App\Filament\Widgets\TotalCustomersChartWidget;
-use App\Filament\Widgets\LatestOrdersWidget;
+use App\Filament\Widgets\InscripcionesStatsWidget;
+use App\Filament\Widgets\LatestInscripcionesWidget;
 
 class Dashboard extends BaseDashboard
 {
+    protected static ?string $navigationIcon = 'heroicon-o-home';
+    
+    protected static string $view = 'filament.pages.dashboard';
+    
     public function getWidgets(): array
     {
         return [
-            OrderPerMonthChartWidget::class,
-            TotalCustomersChartWidget::class,
-            LatestOrdersWidget::class,
+            InscripcionesStatsWidget::class,
+            LatestInscripcionesWidget::class,
         ];
+    }
+    
+    public function getColumns(): int|string|array
+    {
+        return 1;
+    }
+    
+    public function getTitle(): string
+    {
+        return 'Panel de Control';
     }
 }

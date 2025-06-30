@@ -17,7 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear usuarios
+        // Ejecutar seeders
+        $this->call([
+            InscripcionesTableSeeder::class,
+        ]);
+        
+        // Crear usuarios (si es necesario para pruebas)
         $usuarios = [
             User::factory()->create([
                 'name' => 'Administrador Principal',

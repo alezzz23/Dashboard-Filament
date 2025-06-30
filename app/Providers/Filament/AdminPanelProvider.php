@@ -37,7 +37,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                \Filament\Widgets\AccountWidget::class,  // Widget integrado de Filament
+                \App\Filament\Widgets\InscripcionesStatsWidget::class,
+                \App\Filament\Widgets\LatestInscripcionesWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
